@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Water Quality Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+
+<body>
+
+
+    <header>
+        <div class="header-inner">
+            <div class="logo"></div>
+            <div>
+                <h1>Water Quality Prediction</h1>
+                <p class="subtitle">XGBoost-Powered Potability Prediction</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="card">
+
+
+            {% if result %}
+            <div class="result-banner {% if 'Not' in result %}danger{% else %}success{% endif %}">
+                <span class="result-icon">{% if 'Not' in result %}{% else %}{% endif %}</span>
+                <div>
+                    <p class="result-label">Prediction Result</p>
+                    <p class="result-value">{{ result }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+
+            {% if error %}
+            <div class="result-banner danger">
+                <span class="result-icon"></span>
+                <div>
+                    <p class="result-label">Error</p>
+                    <p class="result-value">{{ error }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <p class="card-description">
+                Enter the nine physicochemical parameters below. The model will instantly
+                classify the water sample as <strong>Potable</strong> or
+                <strong>Not Potable</strong>.
+            </p>
+
+            <!-- ── Form ─────────────────────────────────────── -->
+            <form action="/" method="POST" novalidate>
+
+                <!-- pH – centred, full-width row -->
+                <div class="row-center">
+                    <div class="field">
+                        <label for="ph">pH Level</label>
+                        <input type="number" id="ph" name="ph value" placeholder="e.g. 7.0" step="0.01" min="0" max="14"
+                            value="{{ input_vals.get('ph value', '') }}" required />
+                        <span class="hint">Safe range: 6.5 – 8.5</span>
+                    </div>
+                </div>
+
+                <!-- Two-column grid for the remaining 8 parameters -->
+                <div class="grid-2">
+
+                    <div class="field">
+                        <label for="hardness">Hardness (mg/L)</label>
+                        <input type="number" id="hardness" name="Hardness" placeholder="e.g. 200.0" step="0.01"
+                            value="{{ input_vals.get('Hardness', '') }}" required />
+                        <span class="hint">Calcium &amp; magnesium ions</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="conductivity">Conductivity (μS/cm)</label>
+                        <input type="number" id="conductivity" name="Conductivity" placeholder="e.g. 400.0" step="0.01"
+                            value="{{ input_vals.get('Conductivity', '') }}" required />
+                        <span class="hint">Electrical conductivity</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="solids">Solids / TDS (ppm)</label>
+                        <input type="number" id="solids" name="Solids" placeholder="e.g. 20000.0" step="0.01"
+                            value="{{ input_vals.get('Solids', '') }}" required />
+                        <span class="hint">Total dissolved solids</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="organic_carbon">Organic Carbon (ppm)</label>
+                        <input type="number" id="organic_carbon" name="Organic carbon" placeholder="e.g. 14.0"
+                            step="0.01" value="{{ input_vals.get('Organic carbon', '') }}" required />
+                        <span class="hint">Natural organic matter</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="chloramines">Chloramines (ppm)</label>
+                        <input type="number" id="chloramines" name="Chloramines" placeholder="e.g. 7.0" step="0.01"
+                            value="{{ input_vals.get('Chloramines', '') }}" required />
+                        <span class="hint">Disinfectant level</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="trihalomethanes">Trihalomethanes (μg/L)</label>
+                        <input type="number" id="trihalomethanes" name="Trihalomethanes" placeholder="e.g. 66.0"
+                            step="0.01" value="{{ input_vals.get('Trihalomethanes', '') }}" required />
+                        <span class="hint">Disinfection by-products</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="sulfate">Sulfate (mg/L)</label>
+                        <input type="number" id="sulfate" name="Sulfate" placeholder="e.g. 350.0" step="0.01"
+                            value="{{ input_vals.get('Sulfate', '') }}" required />
+                        <span class="hint">Sulfate concentration</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="turbidity">Turbidity (NTU)</label>
+                        <input type="number" id="turbidity" name="Turbidity" placeholder="e.g. 4.0" step="0.01"
+                            value="{{ input_vals.get('Turbidity', '') }}" required />
+                        <span class="hint">Water cloudiness</span>
+                    </div>
+
+                </div><!-- /.grid-2 -->
+
+                <div class="btn-row">
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="submit" class="btn btn-primary">Predict Potability →</button>
+                </div>
+
+            </form>
+        </div><!-- /.card -->
+
+        <!-- Info chips -->
+        <div class="info-row">
+            <span class="chip">⚡ XGBoost Model</span>
+            <span class="chip">📊 9 Parameters</span>
+            <span class="chip">🔬 StandardScaler</span>
+            <span class="chip">🌐 Flask API</span>
+        </div>
+    </main>
+
+    <!-- ── Footer ─────────────────────────────────────────── -->
+    <footer>
+        <p>Water Quality Prediction System &nbsp;|&nbsp; Machine Learning Project</p>
+        <p>Dataset: <em>water_potability.csv</em> &nbsp;|&nbsp; Model: XGBoost Classifier</p>
+    </footer>
+
+</body>
+
+</html>

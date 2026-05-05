@@ -1,0 +1,304 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --blue-dark: #0d3b66;
+    --blue-mid: #1565c0;
+    --blue-light: #4a90d9;
+    --blue-pale: #e8f4fd;
+    --teal: #00897b;
+    --teal-light: #e0f2f1;
+    --red: #c62828;
+    --red-light: #ffebee;
+    --green: #2e7d32;
+    --green-light: #e8f5e9;
+    --text: #1a1a2e;
+    --muted: #546e7a;
+    --border: #cfd8dc;
+    --white: #ffffff;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(13, 59, 102, 0.10);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #e8f4fd 0%, #f0f9ff 50%, #e0f2f1 100%);
+    min-height: 100vh;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+}
+
+
+header {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
+    color: var(--white);
+    padding: 24px 40px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+/* ── Main ──────────────────────────────────────────── */
+main {
+    flex: 1;
+    max-width: 900px;
+    width: 100%;
+    margin: 36px auto;
+    padding: 0 20px;
+}
+
+/* ── Card ──────────────────────────────────────────── */
+.card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 36px 40px;
+}
+
+.card-description {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+/* ── Result / Error Banners ────────────────────────── */
+.result-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    border-left: 5px solid;
+}
+
+.result-banner.success {
+    background: var(--green-light);
+    border-color: var(--green);
+}
+
+.result-banner.danger {
+    background: var(--red-light);
+    border-color: var(--red);
+}
+
+.result-icon {
+    font-size: 2rem;
+}
+
+.result-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.result-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+.result-banner.success .result-value {
+    color: var(--green);
+}
+
+.result-banner.danger .result-value {
+    color: var(--red);
+}
+
+/* ── Form Layout ───────────────────────────────────── */
+.row-center {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.row-center .field {
+    width: 50%;
+    min-width: 240px;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 32px;
+    margin-bottom: 28px;
+}
+
+/* ── Field ─────────────────────────────────────────── */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--blue-dark);
+    letter-spacing: 0.2px;
+}
+
+.field input[type="number"] {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text);
+    background: #fafcff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.field input[type="number"]::-webkit-inner-spin-button,
+.field input[type="number"]::-webkit-outer-spin-button {
+    opacity: 0.4;
+}
+
+.field input[type="number"]:focus {
+    outline: none;
+    border-color: var(--blue-light);
+    box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.18);
+    background: var(--white);
+}
+
+.hint {
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+/* ── Buttons ───────────────────────────────────────── */
+.btn-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 13px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
+    color: var(--white);
+    box-shadow: 0 3px 10px rgba(21, 101, 192, 0.35);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-mid));
+    box-shadow: 0 5px 16px rgba(21, 101, 192, 0.45);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: #eceff1;
+    color: var(--muted);
+}
+
+.btn-secondary:hover {
+    background: #cfd8dc;
+    color: var(--text);
+}
+
+/* ── Info Chips ────────────────────────────────────── */
+.info-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.chip {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 500;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Footer ────────────────────────────────────────── */
+footer {
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    background: var(--white);
+    line-height: 1.7;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 640px) {
+    header {
+        padding: 18px 20px;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    .card {
+        padding: 24px 20px;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .row-center .field {
+        width: 100%;
+    }
+
+    .btn-row {
+        flex-direction: column-reverse;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
